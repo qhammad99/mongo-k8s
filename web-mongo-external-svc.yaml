@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: web-mongo-external-svc
+
+spec:
+  selector:
+    app: web-mongo #It will decide, connect service to which pod.
+  type: LoadBalancer #to make it external. by assigning external ip-address.
+  ports:
+    - protocol: TCP
+      port: 8081 #service port
+      targetPort: 8081 #container port
+      nodePort: 30000 #open port on node, which we will use to access.
+      #nodePort range 30000 - 32767
